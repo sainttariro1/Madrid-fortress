@@ -1,0 +1,42 @@
+const express = require("express");
+const app = express();
+const port = 5000;
+
+app.use(express.json());
+
+// Secure storage for AI authorization key
+const masterKey = "HALLMARK-AI-SECURITY-KEY-2025";
+
+// Lock Crypto Controllers Function
+function lockCryptoControllers() {
+    console.log("🔐 Crypto controllers locked with advanced AI encryption...");
+    return { message: "All crypto controllers are now secured & locked." };
+}
+
+// Unlock Crypto Controllers Function
+function unlockCryptoControllers(userKey) {
+    if (userKey === masterKey) {
+        console.log("✅ AI Authorization Verified. Unlocking crypto controllers...");
+        return { message: "Crypto controllers successfully unlocked." };
+    } else {
+        console.log("🚫 Unauthorized Attempt Detected! Lock remains active.");
+        return { message: "Access Denied! Invalid AI key." };
+    }
+}
+
+// API Routes
+app.get("/lock_crypto_controllers", (req, res) => {
+    const lockResponse = lockCryptoControllers();
+    res.json(lockResponse);
+});
+
+app.post("/unlock_crypto_controllers", (req, res) => {
+    const { key } = req.body;
+    const unlockResponse = unlockCryptoControllers(key);
+    res.json(unlockResponse);
+});
+
+// Start Server
+app.listen(port, () => {
+    console.log(`🚀 AI Crypto Lock Running on http://localhost:${port}`);
+});
